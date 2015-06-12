@@ -90,6 +90,14 @@ var SampleApp = function() {
     /*  ================================================================  */
 
     /**
+     *  Define statics folders
+     */
+     self.setStatic = function() {
+        self.app.use('/lib', express.static('miner-app/libraries'));
+     }
+
+
+    /**
      *  Create the routing table entries + handlers for the application.
      */
     self.createRoutes = function() {
@@ -121,6 +129,9 @@ var SampleApp = function() {
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+
+        // Add statics folders
+        self.setStatic();
     };
 
 
