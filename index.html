@@ -29,7 +29,10 @@
 				<input type="checkbox" id="ghostSwitch" name="ghostSwitch">
 				<div id="PDA-Content" class="container">
 					<div class="switcher">
-						<label for="ghostSwitch">TAP TO START</label>
+						<label for="ghostSwitch" ng-click="switchSound()">TAP TO START</label>
+						<audio preload id="switchSound">
+							<source src="/aud/turnon.ogg">
+						</audio>
 					</div>
 					<div class="screen"></div>
 				</div>
