@@ -134,6 +134,8 @@ var SampleApp = function() {
 	 */
 	 self.setStatic = function() {
 		self.app.use('/lib', express.static('miner-app/libraries'));
+		self.app.use('/js', express.static('miner-app/scripts'));
+		self.app.use('/ctrl', express.static('miner-app/controllers'));
 	 }
 
 

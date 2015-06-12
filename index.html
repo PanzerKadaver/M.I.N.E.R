@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MinerApp">
 	<head>
 		<meta charset="UTF-8">
 		<title>M.I.N.E.R</title>
@@ -7,8 +7,19 @@
 		<!-- ANGULAR -->
 		<script type="text/javascript" src="lib/angular/angular.js"></script>
 
+		<!-- App Scripts -->
+		<script type="text/javascript" src="js/MinerApp.js"></script>
+
+		<!-- App Controllers -->
+		<script type="text/javascript" src="ctrl/RootCtrl.js"></script>
+
+		<!-- App Services -->
+
+		<!-- App Factories -->
+
 	</head>
-	<body>
-		Hello world !
+	<body ng-controller="RootCtrl">
+		<p>Hello world !</p>
+		<p>Version v{{version}}</p>
 	</body>
 </html>
