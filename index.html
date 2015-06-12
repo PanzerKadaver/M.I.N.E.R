@@ -17,9 +17,26 @@
 
 		<!-- App Factories -->
 
+		<!-- App styles -->
+		<link rel="stylesheet" type="text/css" href="css/MinerApp.css">
+		<link rel="stylesheet" type="text/css" href="css/Pda.css">
+		<link rel="stylesheet" type="text/css" href="css/flicker.css">
+
 	</head>
 	<body ng-controller="RootCtrl">
-		<p>Hello world !</p>
-		<p>Version v{{version}}</p>
+		<section id="AppContainer">
+			<div id="PDA">
+				<input type="checkbox" id="ghostSwitch" name="ghostSwitch">
+				<div id="PDA-Content" class="container">
+					<div class="switcher">
+						<label for="ghostSwitch">TAP TO START</label>
+					</div>
+					<div class="screen"></div>
+				</div>
+			</div>
+		</section>
+		<footer id="AppFooter">
+			
+		</footer>
 	</body>
 </html>

@@ -1,0 +1,102 @@
+@keyframes flicker {
+	0% {
+		opacity: 0.02021;
+	}
+	5% {
+		opacity: 0.04853;
+	}
+	10% {
+		opacity: 0.06759;
+	}
+	15.0% {
+		opacity: 0.26142;
+	}
+	20% {
+		opacity: 0.43005;
+	}
+	25% {
+		opacity: 0.15263;
+	}
+	30.0% {
+		opacity: 0.4358;
+	}
+	35% {
+		opacity: 0.4708;
+	}
+	40% {
+		opacity: 0.50565;
+	}
+	45% {
+		opacity: 0.17911;
+	}
+	50% {
+		opacity: 0.15587;
+	}
+	55.0% {
+		opacity: 0.17027;
+	}
+	60.0% {
+		opacity: 0.96303;
+	}
+	65% {
+		opacity: 0.16097;
+	}
+	70% {
+		opacity: 0.87519;
+	}
+	75% {
+		opacity: 0.837;
+	}
+	80% {
+		opacity: 0.31169;
+	}
+	85.0% {
+		opacity: 0.93187;
+	}
+	90% {
+		opacity: 0.9093;
+	}
+	95% {
+		opacity: 0.88891;
+	}
+	100% {
+		opacity: 0.0096;
+	}
+}
+
+.container {
+	position: relative;
+	overflow: hidden;
+}
+
+.container::after {
+	content: " ";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(18, 16, 16, 0.1);
+	opacity: 0;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.container::before {
+	content: " ";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+	z-index: 2;
+	background-size: 100% 2px, 3px 100%;
+	pointer-events: none;
+}
+
+#ghostSwitch:checked ~ .container::after {
+	animation: flicker 0.15s infinite;
+}
