@@ -145,6 +145,7 @@ var SampleApp = function() {
 		self.app.use('/ctrl', express.static('miner-app/controllers'));
 		self.app.use('/css', express.static('miner-app/styles'));
 		self.app.use('/img', express.static('miner-app/images'));
+		self.app.use('/aud', express.static('miner-app/audio'));
 	 }
 
 
