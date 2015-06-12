@@ -1,0 +1,53 @@
+#PDA {
+	display: inline-block;
+	vertical-align: middle;
+	width: 1280px;
+	height: 1000px;
+	background-image: url("/img/pda.jpg");
+	text-align: left;
+}
+
+#PDA-Content {
+	width: 1155px;
+	height: 835px;
+	margin-top: 71px;
+	margin-left: 63px;
+	border-radius: 14px;
+}
+
+#PDA-Content .screen {
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0px 0px 75px 0px #336699;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	border-radius: 10px;
+}
+
+#PDA-Content .switcher {
+	width: 1155px;
+	height: 835px;
+	line-height: 835px;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5;
+}
+
+#ghostSwitch {
+	display: none;
+}
+
+#PDA-Content .switcher label {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	line-height: normal;
+	font-family: monospace;
+	font-size: 50px;
+	color: rgba(100, 100, 100, 0.3);
+	cursor: pointer;
+}
