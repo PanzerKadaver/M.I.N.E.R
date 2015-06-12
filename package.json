@@ -1,22 +1,24 @@
 {
-  "name": "OpenShift-Sample-App",
-  "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "name": "M.I.N.E.R",
+  "version": "0.0.1",
+  "description": "A browser game about planet mining",
   "keywords": [
-    "OpenShift",
+    "M.I.N.E.R",
+    "MINER",
+    "miner",
+    "Elite Dangerous",
+    "Elite",
     "Node.js",
-    "application",
-    "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "PzKd",
+    "email": "marc.guilmard@gmail.com",
+    "url": "https://github.com/Toxicat"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://miner-panzerkadaver.rhcloud.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/Toxicat/M.I.N.E.R"
   },
 
   "engines": {
