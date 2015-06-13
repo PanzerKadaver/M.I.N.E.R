@@ -5,5 +5,9 @@ MinerApp.config(function ($stateProvider, $urlRouterProvider) {
 		.state('start', {
 			url: '/start',
 			templateUrl: '/view/start.html'
+		})
+		.state('register', {
+			url: '/register',
+			templateUrl: '/view/register.html'
 		});
 });
