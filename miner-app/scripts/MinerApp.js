@@ -1,4 +1,4 @@
-var MinerApp = angular.module('MinerApp', ['MinerControllers', 'MinerService', 'MinerFactories']);
+var MinerApp = angular.module('MinerApp', ['ui.router', 'MinerControllers', 'MinerService', 'MinerFactories']);
 
 var MinerControllers = angular.module('MinerControllers', []);
 
