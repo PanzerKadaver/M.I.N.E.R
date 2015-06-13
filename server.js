@@ -124,12 +124,13 @@ var SampleApp = function() {
 	 	}));
 	 	self.app.use(passport.initialize());
 	 	self.app.use(passport.session());
+
+	 	self.initPassport();
 	 }
 
 	 self.initPassport = function () {
-
+	 	require("./miner-server/passport/init")(passport);
 	 };
-
 
 	/**
 	 *  Create the routing table entries + handlers for the application.

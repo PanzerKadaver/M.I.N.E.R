@@ -25,13 +25,13 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "express": "~3.4.4",
     "express-session": "^1.11.3",
     "mongoose": "^4.0.5",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "passport-strategy": "^1.0.0",
-    "pause": "0.0.1"
+    "passport-strategy": "^1.0.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
