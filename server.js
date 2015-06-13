@@ -26,7 +26,7 @@ var SampleApp = function() {
 	 */
 	self.setupVariables = function() {
 		require('./miner-server/init/setupVariables')(self);
-	}
+	};
 
 
 	/**
@@ -46,14 +46,16 @@ var SampleApp = function() {
 	 */
 	self.rCache = function() {
 		self.populateCache();
-	}
+	};
 
 
 	/**
 	 *  Retrieve entry (content) from cache.
 	 *  @param {string} key  Key identifying content to retrieve from cache.
 	 */
-	self.cache_get = function(key) { return self.zcache[key]; };
+	self.cache_get = function(key) {
+		return self.zcache[key];
+	};
 
 
 	/**
@@ -96,7 +98,7 @@ var SampleApp = function() {
 	 */
 	 self.setupStatic = function() {
 		require('./miner-server/init/setupStatic')(self);
-	 }
+	 };
 
 	 self.setupMongo = function () {
 		var options = {
@@ -112,7 +114,7 @@ var SampleApp = function() {
 	 		else
 	 			console.warn('Successfully connected to DB');
 	 	});
-	 }
+	 };
 
 	 self.setupPassport = function () {
 	 	self.app.use(expressSession({
@@ -123,6 +125,10 @@ var SampleApp = function() {
 	 	self.app.use(passport.initialize());
 	 	self.app.use(passport.session());
 	 }
+
+	 self.initPassport = function () {
+
+	 };
 
 
 	/**
