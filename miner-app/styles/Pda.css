@@ -29,6 +29,11 @@
 	display: none;
 }
 
+#PDA-Content .screen .view-container {
+	width: 100%;
+	height: 100%;
+}
+
 #PDA-Content .switcher {
 	width: 1155px;
 	height: 835px;
