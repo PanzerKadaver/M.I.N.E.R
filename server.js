@@ -9,9 +9,9 @@ var mongoose		= require('mongoose');
 
 
 /**
- *  Define the sample application.
+ *  Define the application.
  */
-var SampleApp = function() {
+var MinerApp = function() {
 
 	//  Scope.
 	var self = this;
@@ -65,7 +65,7 @@ var SampleApp = function() {
 	 */
 	self.terminator = function(sig){
 		if (typeof sig === "string") {
-		   console.log('%s: Received %s - terminating sample app ...',
+		   console.log('%s: Received %s - terminating M.I.N.E.R ...',
 					   Date(Date.now()), sig);
 		   process.exit(1);
 		}
@@ -152,6 +152,9 @@ var SampleApp = function() {
 		for (var r in self.routes) {
 			self.app.get(r, self.routes[r]);
 		}
+		for (var r in self.post) {
+			self.app.post(r, self.post[r]);
+		}
 
 		// Add statics folders
 		self.setupStatic();
@@ -165,7 +168,7 @@ var SampleApp = function() {
 
 
 	/**
-	 *  Initializes the sample application.
+	 *  Initializes the application.
 	 */
 	self.initialize = function() {
 		self.setupVariables();
@@ -178,7 +181,7 @@ var SampleApp = function() {
 
 
 	/**
-	 *  Start the server (starts up the sample application).
+	 *  Start the server (starts up the application).
 	 */
 	self.start = function() {
 		//  Start the app on the specific interface (and port).
@@ -188,14 +191,14 @@ var SampleApp = function() {
 		});
 	};
 
-};   /*  Sample Application.  */
+};   /*  Miner Application.  */
 
 
 
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
+var zapp = new MinerApp();
 zapp.initialize();
 zapp.start();
 
