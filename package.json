@@ -20,18 +20,19 @@
     "type": "git",
     "url": "https://github.com/Toxicat/M.I.N.E.R"
   },
-
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~3.4.4",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.0.5",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js"
 }
