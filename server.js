@@ -1,7 +1,11 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var express	= require('express');
-var fs		= require('fs');
+var express			= require('express');
+var expressSession	= require('express-session');
+var fs				= require('fs');
+var passport		= require('passport');
+var passportLocal	= require('passport-local');
+var mongoose		= require('mongoose');
 
 
 /**
