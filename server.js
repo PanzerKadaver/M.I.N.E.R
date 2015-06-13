@@ -98,6 +98,32 @@ var SampleApp = function() {
 		require('./miner-server/init/setupStatic')(self);
 	 }
 
+	 self.setupMongo = function () {
+		var options = {
+			db: { native_parser: true },
+			replset: {},
+			server: { poolSize: 5 }
+		};
+
+	 	options.server.socketOptions = options.replset.socketOptions = { keepAlive: 1 };
+	 	mongoose.connect(self.mongo.url, function (err) {
+	 		if (err)
+	 			throw err;
+	 		else
+	 			console.warn('Successfully connected to DB');
+	 	});
+	 }
+
+	 self.setupPassport = function () {
+	 	self.app.use(expressSession({
+	 		resave: true,
+	 		saveUninitialized: true,
+	 		secret: self.secret
+	 	}));
+	 	self.app.use(passport.initialize());
+	 	self.app.use(passport.session());
+	 }
+
 
 	/**
 	 *  Create the routing table entries + handlers for the application.
@@ -135,6 +161,12 @@ var SampleApp = function() {
 
 		// Add statics folders
 		self.setupStatic();
+
+		// Engage connection to db
+		self.setupMongo();
+
+		// Init PassportJS
+		self.setupPassport();
 	};
 
 
