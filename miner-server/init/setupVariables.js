@@ -6,6 +6,7 @@ module.exports = function (self) {
 	//  Set the environment variables we need.
 	self.ipaddress	= process.env.OPENSHIFT_NODEJS_IP;
 	self.port		= process.env.OPENSHIFT_NODEJS_PORT;
+	self.secret = process.env.OPENSHIFT_SESSION_KEY;
 	self.mongo		= {
 		user:	process.env.OPENSHIFT_MONGODB_DB_USERNAME,
 		pass:	process.env.OPENSHIFT_MONGODB_DB_PASSWORD,
@@ -25,6 +26,11 @@ module.exports = function (self) {
 		//  allows us to run/test the app locally.
 		console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
 		self.ipaddress = "127.0.0.1";
+	}
+
+	if (typeof self.secret === "undefined") {
+		console.warn('No OPENSHIFT_SESSION_KEY var, using azertyu*1');
+		self.secret = "azertyu*1";
 	}
 
 	if (typeof self.mongo.user === "undefined") {
@@ -52,5 +58,5 @@ module.exports = function (self) {
 		self.mongo.db = "miner-local";
 	}
 
-	self.mongo.url = "mongo://" + self.mongo.user + ":" + self.mongo.pass + "@" + self.mongo.host + ":" + self.mongo.port + "/" + self.mongo.db;
+	self.mongo.url = "mongodb://" + self.mongo.user + ":" + self.mongo.pass + "@" + self.mongo.host + ":" + self.mongo.port + "/" + self.mongo.db;
 };
