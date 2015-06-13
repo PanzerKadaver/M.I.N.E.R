@@ -24,7 +24,9 @@ var SampleApp = function() {
 	/**
 	 *  Set up server IP address and port # using env variables/defaults.
 	 */
-	self.setupVariables = function() { require('./miner-server/init/setupVariables')(self); };
+	self.setupVariables = function() {
+		require('./miner-server/init/setupVariables')(self);
+	}
 
 
 	/**
@@ -92,14 +94,8 @@ var SampleApp = function() {
 	/**
 	 *  Define statics folders
 	 */
-	 self.setStatic = function() {
-		self.app.use('/lib', express.static('miner-app/libraries'));
-		self.app.use('/js', express.static('miner-app/scripts'));
-		self.app.use('/ctrl', express.static('miner-app/controllers'));
-		self.app.use('/css', express.static('miner-app/styles'));
-		self.app.use('/img', express.static('miner-app/images'));
-		self.app.use('/aud', express.static('miner-app/audio'));
-		self.app.use('/view', express.static('miner-app/views'));
+	 self.setupStatic = function() {
+		require('./miner-server/init/setupStatic')(self);
 	 }
 
 
@@ -138,7 +134,7 @@ var SampleApp = function() {
 		}
 
 		// Add statics folders
-		self.setStatic();
+		self.setupStatic();
 	};
 
 
