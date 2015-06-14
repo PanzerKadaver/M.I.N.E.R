@@ -1,5 +1,5 @@
 MinerControllers.controller('RootCtrl', ['$scope', function ($scope) {
-	$scope.version = "0.0.3";
+	$scope.version = "0.0.4";
 
 	$scope.switchSound = function() {
 		var audio = document.getElementById('switchSound');
