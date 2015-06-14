@@ -1,13 +1,19 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var express	= require('express');
-var fs		= require('fs');
+var express			= require('express');
+var expressSession	= require('express-session');
+var fs				= require('fs');
+var passport		= require('passport');
+var passportLocal	= require('passport-local');
+var mongoose		= require('mongoose');
+var flash			= require('connect-flash');
+var bodyParser		= require('body-parser');
 
 
 /**
- *  Define the sample application.
+ *  Define the application.
  */
-var SampleApp = function() {
+var MinerApp = function() {
 
 	//  Scope.
 	var self = this;
@@ -21,56 +27,7 @@ var SampleApp = function() {
 	 *  Set up server IP address and port # using env variables/defaults.
 	 */
 	self.setupVariables = function() {
-		//  Set the environment variables we need.
-		self.ipaddress	= process.env.OPENSHIFT_NODEJS_IP;
-		self.port		= process.env.OPENSHIFT_NODEJS_PORT;
-		self.mongo		= {
-			user:	process.env.OPENSHIFT_MONGODB_DB_USERNAME,
-			pass:	process.env.OPENSHIFT_MONGODB_DB_PASSWORD,
-			host:	process.env.OPENSHIFT_MONGODB_DB_HOST,
-			port:	process.env.OPENSHIFT_MONGODB_DB_PORT,
-			db:		process.env.OPENSHIFT_MONGODB_DB_NAME,
-			url:	""
-		};
-
-		if (typeof self.ipaddress === "undefined") {
-			console.warn('No OPENSHIFT_NODEJS_PORT var, using 3300');
-			self.port = 3300;
-		}
-
-		if (typeof self.ipaddress === "undefined") {
-			//  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-			//  allows us to run/test the app locally.
-			console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-			self.ipaddress = "127.0.0.1";
-		}
-
-		if (typeof self.mongo.user === "undefined") {
-			console.warn('No OPENSHIFT_MONGODB_DB_USERNAME var, using admin-local');
-			self.mongo.user = "admin-local";
-		}
-
-		if (typeof self.mongo.pass === "undefined") {
-			console.warn('No OPENSHIFT_MONGODB_DB_PASSWORD var, using azertyu*1');
-			self.mongo.pass = "azertyu*1";
-		}
-
-		if (typeof self.mongo.host === "undefined") {
-			console.warn('No OPENSHIFT_MONGODB_DB_HOST var, using 127.0.0.1');
-			self.mongo.host = "127.0.0.1";
-		}
-
-		if (typeof self.mongo.port === "undefined") {
-			console.warn('No OPENSHIFT_MONGODB_DB_PORT var, using 27017');
-			self.mongo.port = 27017;
-		}
-
-		if (typeof self.mongo.db === "undefined") {
-			console.warn('No OPENSHIFT_MONGODB_DB_NAME var, using miner-local');
-			self.mongo.db = "miner-local";
-		}
-
-		self.mongo.url = "mongo://" + self.mongo.user + ":" + self.mongo.pass + "@" + self.mongo.host + ":" + self.mongo.port + "/" + self.mongo.db;
+		require('./miner-server/init/setupVariables')(self);
 	};
 
 
@@ -91,14 +48,16 @@ var SampleApp = function() {
 	 */
 	self.rCache = function() {
 		self.populateCache();
-	}
+	};
 
 
 	/**
 	 *  Retrieve entry (content) from cache.
 	 *  @param {string} key  Key identifying content to retrieve from cache.
 	 */
-	self.cache_get = function(key) { return self.zcache[key]; };
+	self.cache_get = function(key) {
+		return self.zcache[key];
+	};
 
 
 	/**
@@ -108,7 +67,7 @@ var SampleApp = function() {
 	 */
 	self.terminator = function(sig){
 		if (typeof sig === "string") {
-		   console.log('%s: Received %s - terminating sample app ...',
+		   console.log('%s: Received %s - terminating M.I.N.E.R ...',
 					   Date(Date.now()), sig);
 		   process.exit(1);
 		}
@@ -139,34 +98,49 @@ var SampleApp = function() {
 	/**
 	 *  Define statics folders
 	 */
-	 self.setStatic = function() {
-		self.app.use('/lib', express.static('miner-app/libraries'));
-		self.app.use('/js', express.static('miner-app/scripts'));
-		self.app.use('/ctrl', express.static('miner-app/controllers'));
-		self.app.use('/css', express.static('miner-app/styles'));
-		self.app.use('/img', express.static('miner-app/images'));
-		self.app.use('/aud', express.static('miner-app/audio'));
+	 self.setupStatic = function() {
+		require('./miner-server/init/setupStatic')(self);
+	 };
+
+	 self.setupMongo = function () {
+		var options = {
+			db: { native_parser: true },
+			replset: {},
+			server: { poolSize: 5 }
+		};
+
+	 	options.server.socketOptions = options.replset.socketOptions = { keepAlive: 1 };
+	 	mongoose.connect(self.mongo.url, function (err) {
+	 		if (err)
+	 			throw err;
+	 		else
+	 			console.warn('Successfully connected to DB');
+	 	});
+	 };
+
+	 self.setupPassport = function () {
+	 	self.app.use(expressSession({
+	 		resave: true,
+	 		saveUninitialized: true,
+	 		secret: self.secret
+	 	}));
+	 	self.app.use(flash());
+
+	 	self.app.use(passport.initialize());
+	 	self.app.use(passport.session());
+
+	 	self.initPassport();
 	 }
 
+	 self.initPassport = function () {
+	 	require("./miner-server/passport/init")(passport);
+	 };
 
 	/**
 	 *  Create the routing table entries + handlers for the application.
 	 */
 	self.createRoutes = function() {
-		self.routes = { };
-
-		/**
-		self.routes['/asciimo'] = function(req, res) {
-			var link = "http://i.imgur.com/kmbjB.png";
-			res.send("<html><body><img src='" + link + "'></body></html>");
-		};
-		**/
-		
-		self.routes['/'] = function(req, res) {
-			res.setHeader('Content-Type', 'text/html');
-			self.rCache();
-			res.send(self.cache_get('index.html') );
-		};
+		require('./miner-server/routes')(self, passport);
 	};
 
 
@@ -175,21 +149,34 @@ var SampleApp = function() {
 	 *  the handlers.
 	 */
 	self.initializeServer = function() {
-		self.createRoutes();
 		self.app = express();
+
+		self.app.use(bodyParser.urlencoded({ extended: true }));
+
+		// Add statics folders
+		self.setupStatic();
+
+		// Engage connection to db
+		self.setupMongo();
+
+		// Init PassportJS
+		self.setupPassport();
+
+		// Create routes
+		self.createRoutes();
 
 		//  Add handlers for the app (from the routes).
 		for (var r in self.routes) {
 			self.app.get(r, self.routes[r]);
 		}
-
-		// Add statics folders
-		self.setStatic();
+		for (var r in self.post) {
+			self.app.post(r, self.post[r]);
+		}		
 	};
 
 
 	/**
-	 *  Initializes the sample application.
+	 *  Initializes the application.
 	 */
 	self.initialize = function() {
 		self.setupVariables();
@@ -202,7 +189,7 @@ var SampleApp = function() {
 
 
 	/**
-	 *  Start the server (starts up the sample application).
+	 *  Start the server (starts up the application).
 	 */
 	self.start = function() {
 		//  Start the app on the specific interface (and port).
@@ -212,14 +199,14 @@ var SampleApp = function() {
 		});
 	};
 
-};   /*  Sample Application.  */
+};   /*  Miner Application.  */
 
 
 
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
+var zapp = new MinerApp();
 zapp.initialize();
 zapp.start();
 

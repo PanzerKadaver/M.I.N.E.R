@@ -6,40 +6,46 @@
 
 		<!-- ANGULAR -->
 		<script type="text/javascript" src="lib/angular/angular.js"></script>
+		<script type="text/javascript" src="lib/angular/angular-ui-router.js"></script>
 
 		<!-- App Scripts -->
 		<script type="text/javascript" src="js/MinerApp.js"></script>
+		<script type="text/javascript" src="js/MinerRouter.js"></script>
 
 		<!-- App Controllers -->
 		<script type="text/javascript" src="ctrl/RootCtrl.js"></script>
+		<script type="text/javascript" src="ctrl/RegisterCtrl.js"></script>
 
 		<!-- App Services -->
 
 		<!-- App Factories -->
 
 		<!-- App styles -->
+		<link rel="stylesheet" type="text/css" href="css/font-awesome/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/MinerApp.css">
+		<link rel="stylesheet" type="text/css" href="css/font.css">
 		<link rel="stylesheet" type="text/css" href="css/Pda.css">
 		<link rel="stylesheet" type="text/css" href="css/flicker.css">
+		<link rel="stylesheet" type="text/css" href="css/start.css">
+		<link rel="stylesheet" type="text/css" href="css/register.css">
 
 	</head>
 	<body ng-controller="RootCtrl">
+		<audio preload id="switchSound">
+			<source src="/aud/turnon.ogg">
+		</audio>
 		<section id="AppContainer">
 			<div id="PDA">
 				<input type="checkbox" id="ghostSwitch" name="ghostSwitch">
 				<div id="PDA-Content" class="container">
 					<div class="switcher">
 						<label for="ghostSwitch" ng-click="switchSound()">TAP TO START</label>
-						<audio preload id="switchSound">
-							<source src="/aud/turnon.ogg">
-						</audio>
 					</div>
-					<div class="screen"></div>
+					<div class="screen">
+						<div class="view-container" ui-view></div>
+					</div>
 				</div>
 			</div>
 		</section>
-		<footer id="AppFooter">
-			
-		</footer>
 	</body>
 </html>

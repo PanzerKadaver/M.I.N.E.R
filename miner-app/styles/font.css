@@ -1,0 +1,19 @@
+.bright-blue {
+	color: #01B0F0;
+	text-shadow: 0 0 20px rgba(4, 99, 128, 0.86);
+}
+
+.bright-orange {
+	color: #e08400;
+	text-shadow: 0 0 20px rgba(201, 77, 0, 0.86);
+}
+
+.bright-green {
+	color: #AEEE00;
+	text-shadow: 0 0 20px rgba(150, 202, 45, 0.86);
+}
+
+.bright-red {
+    color: #C9001A;
+    text-shadow: 0 0 20px rgba(185, 18, 27, 0.86);
+}
