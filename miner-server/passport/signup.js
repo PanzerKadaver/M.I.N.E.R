@@ -44,7 +44,6 @@ module.exports = function (passport) {
 				newConvict.username = username;
 				newConvict.password = createHash(password);
 				newConvict.email = req.param('email');
-				newConvict.gender = req.param('gender');
 				newConvict.collar = createCollar();
 
 				newConvict.save(function (err) {
