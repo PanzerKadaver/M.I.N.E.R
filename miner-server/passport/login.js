@@ -14,7 +14,7 @@ module.exports = function (passport) {
 
 		Convict.findOne({ 'username' : username }, function (err, convict) {
 			if (err)
-				return done(err);
+				return done(err, false, 201);
 
 			if (!convict) {
 				console.log('User not found with username <' + convict + '>');
