@@ -31,12 +31,12 @@ module.exports = function (passport) {
 			
 			if (err) {
 				console.log('Error in signup : <' + err + '>');
-				return done(err);
+				return done(err, null, 101);
 			}
 
 			if (convict) {
 				console.log('User <' + convict + '> already exist');
-				return done(null, false, "Already exist");
+				return done(null, false, "User already exist");
 			}
 			else {
 				var newConvict = new Convict();
@@ -50,11 +50,11 @@ module.exports = function (passport) {
 				newConvict.save(function (err) {
 					if (err) {
 						console.log('Unable to save new user <' + username + '> : ' + err);
-						return done(err);
+						return done(err, null, 102);
 					}
 
 					console.log('Registration of user <' + username + '> was a success');
-					return done(null, newConvict);
+					return done(null, newConvict, "Registration was success. You can now login.");
 				});
 			}
 		});

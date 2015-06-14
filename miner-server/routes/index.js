@@ -24,7 +24,12 @@ module.exports = function (self, passport) {
 
 	self.post['/signup'] = function (req, res, next) {
 		passport.authenticate('signup', function (err, user, info) {
-			console.log(err, user, info);
+			if (err)
+				res.status(500).send({err: info, message: "Database error, please contact administrator with the following code :"});
+			else if (user == false)
+				res.status(401).send({message: info});
+			else
+				res.status(200).send(({message: info}));
 		})(req, res, next);
 	};
 };
