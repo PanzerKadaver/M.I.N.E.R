@@ -11,6 +11,16 @@
 	margin-top: 200px;
 }
 
+#RegisterContainer form div.status-msg {
+	display: inline-block;
+	height: 30px;
+	margin-bottom: 15px;
+	font-size: 20px;
+	width: 100%;
+	text-align: center;
+}
+
+
 #RegisterContainer form label {
 	font-size: 20px;
 }

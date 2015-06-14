@@ -1,6 +1,10 @@
 <div id="RegisterContainer">
-	<div class="status-msg"><span class=""></span></div>
 	<form ng-submit="submitRegister()" name="registerForm" autocomplete="off" novalidate>
+		<div class="status-msg">
+			<span class="bright-orange" ng-show="status == 1"><i class="fa fa-refresh fa-spin"></i> Please stand-by...</span>
+			<span class="bright-green" ng-show="status == 2"><i class="fa fa-check"></i> {{response}}</span>
+			<span class="bright-red" ng-show="status == 3"><i class="fa fa-exclamation-triangle"></i> Error : {{response}}</span>
+		</div></br>
 		<label for="username" class="bright-blue desc">Username:</label>
 		<div class="input-group">
 			<input type="text" name="username" id="username" ng-model="newUser.username" ng-minlength="3" ng-maxlength="15" required>
