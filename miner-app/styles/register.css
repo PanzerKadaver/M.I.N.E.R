@@ -64,7 +64,7 @@
 	position: relative;
 }
 
-#RegisterContainer form span.error {
+#RegisterContainer form span.form-error {
 	font-size: 17px;
 	position: absolute;
 	display: inline-block;

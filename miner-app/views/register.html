@@ -1,23 +1,24 @@
 <div id="RegisterContainer">
+	<div class="status-msg"><span class=""></span></div>
 	<form ng-submit="submitRegister()" name="registerForm" autocomplete="off" novalidate>
 		<label for="username" class="bright-blue desc">Username:</label>
 		<div class="input-group">
 			<input type="text" name="username" id="username" ng-model="newUser.username" ng-minlength="3" ng-maxlength="15" required>
-			<span class="error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">Missing information</span>
-			<span class="error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.minlength">Too short</span>
-			<span class="error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.maxlength">Too long</span>
+			<span class="form-error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.required">Missing information</span>
+			<span class="form-error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.minlength">Too short</span>
+			<span class="form-error bright-red" ng-show="registerForm.username.$dirty && registerForm.username.$error.maxlength">Too long</span>
 		</div></br>
 		<label for="password" class="bright-blue desc">Password:</label>
 		<div class="input-group">
 			<input type="password" name="password" id="password" ng-model="newUser.password" ng-minlength="5" required>
-			<span class="error bright-red" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">Missing information</span>
-			<span class="error bright-red" ng-show="registerForm.password.$dirty && registerForm.password.$error.minlength">Too short</span>
+			<span class="form-error bright-red" ng-show="registerForm.password.$dirty && registerForm.password.$error.required">Missing information</span>
+			<span class="form-error bright-red" ng-show="registerForm.password.$dirty && registerForm.password.$error.minlength">Too short</span>
 		</div></br>
 		<label for="email" class="bright-blue desc">Email:</label>
 		<div class="input-group">
 			<input type="email" name="email" id="email" ng-model="newUser.email" required>
-			<span class="error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">Missing information</span>
-			<span class="error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.email">Misformated information</span>
+			<span class="form-error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">Missing information</span>
+			<span class="form-error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.email">Misformated information</span>
 		</div></br>
 		<button type="button" ui-sref="start">CANCEL</button>
 		<button type="submit" ng-disabled="registerForm.$invalid">REGISTER</button>
