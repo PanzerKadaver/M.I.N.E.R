@@ -6,6 +6,7 @@ var fs				= require('fs');
 var passport		= require('passport');
 var passportLocal	= require('passport-local');
 var mongoose		= require('mongoose');
+var flash			= require('connect-flash');
 
 
 /**
@@ -122,6 +123,8 @@ var MinerApp = function() {
 	 		saveUninitialized: true,
 	 		secret: self.secret
 	 	}));
+	 	self.app.use(flash());
+
 	 	self.app.use(passport.initialize());
 	 	self.app.use(passport.session());
 
@@ -145,16 +148,15 @@ var MinerApp = function() {
 	 *  the handlers.
 	 */
 	self.initializeServer = function() {
-		self.createRoutes();
 		self.app = express();
 
-		//  Add handlers for the app (from the routes).
-		for (var r in self.routes) {
-			self.app.get(r, self.routes[r]);
-		}
-		for (var r in self.post) {
-			self.app.post(r, self.post[r]);
-		}
+		self.app.use(function(err, req, res, next) {
+			res.status(err.status || 500);
+			res.render('error', {
+				message: err.message,
+				error: err
+			});
+		});
 
 		// Add statics folders
 		self.setupStatic();
@@ -164,6 +166,17 @@ var MinerApp = function() {
 
 		// Init PassportJS
 		self.setupPassport();
+
+		// Create routes
+		self.createRoutes();
+
+		//  Add handlers for the app (from the routes).
+		for (var r in self.routes) {
+			self.app.get(r, self.routes[r]);
+		}
+		for (var r in self.post) {
+			self.app.post(r, self.post[r]);
+		}		
 	};
 
 
