@@ -1,3 +1,14 @@
 <div id="RegisterContainer">
-	
+	<div class="form-container">
+		<form ng-submit="registerSubmit()">
+			<input type="text" name="username">
+			<input type="text" name="password">
+			<input type="text" name="confirm-password">
+			<input type="radio" name="gender" value="male" checked>
+			<input type="radio" name="gender" value="female">
+			<input type="email" name="email">
+			<input type="email" name="confirm-email">
+			<button type="submit">REGISTER</button>
+		</form>
+	</div>
 </div>
