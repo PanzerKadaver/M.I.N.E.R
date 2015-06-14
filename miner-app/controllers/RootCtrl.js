@@ -3,7 +3,7 @@ MinerControllers.controller('RootCtrl', ['$scope', function ($scope) {
 
 	$scope.switchSound = function() {
 		var audio = document.getElementById('switchSound');
-		audio.volume = 0.2;
+		audio.volume = 0.5;
 		audio.play();
 	}
 }]);
