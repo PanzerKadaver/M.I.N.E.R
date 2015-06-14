@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-var Convict = require('../models/Convicts');
+var Convict = require('../models/Convict');
 var bCrypt = require('bcrypt-nodejs');
 
 var createHash = function (password) {
@@ -27,41 +27,36 @@ module.exports = function (passport) {
 	passport.use('signup', new LocalStrategy({
 		passReqToCallback: true
 	}, function (req, username, password, done) {
-		
-		findOrCreateUser = function() {
-			Convict.findOne({ 'username' : username }, function (err, convict) {
-				
-				if (err) {
-					console.log('Error in signup : <' + err + '>');
-					return done(err);
-				}
+		Convict.findOne({ 'username' : username }, function (err, convict) {
+			
+			if (err) {
+				console.log('Error in signup : <' + err + '>');
+				return done(err);
+			}
 
-				if (convict) {
-					console.log('User <' + user + '> already exist');
-					return done(null, false, req.flash('message', 'Convict already exist'));
-				}
-				else {
-					var newConvict = new Convict();
+			if (convict) {
+				console.log('User <' + convict + '> already exist');
+				return done(null, false, "Already exist");
+			}
+			else {
+				var newConvict = new Convict();
 
-					newConvict.username = username;
-					newConvict.password = createHash(password);
-					newConvict.email = req.param('email');
-					newConvict.gender = req.param('gender');
-					newConvict.collar = createCollar();
+				newConvict.username = username;
+				newConvict.password = createHash(password);
+				newConvict.email = req.param('email');
+				newConvict.gender = req.param('gender');
+				newConvict.collar = createCollar();
 
-					newConvict.save(function (err) {
-						if (err) {
-							console.log('Unable to save new user <' + username + '> : ' + err);
-							return done(err);
-						}
+				newConvict.save(function (err) {
+					if (err) {
+						console.log('Unable to save new user <' + username + '> : ' + err);
+						return done(err);
+					}
 
-						console.log('Registration of user <' + username + '> was a success');
-						return done(null, newUser);
-					});
-				}
-			});
-		};
-
-		process.newTick(findOrCreateUser);
+					console.log('Registration of user <' + username + '> was a success');
+					return done(null, newConvict);
+				});
+			}
+		});
 	}));
 };

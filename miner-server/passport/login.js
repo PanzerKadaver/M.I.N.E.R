@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-var Convict = require('../models/Convicts');
+var Convict = require('../models/Convict');
 var bCrypt = require('bcrypt-nodejs');
 
 var isValidPassword = function (user, password) {

@@ -7,6 +7,7 @@ var passport		= require('passport');
 var passportLocal	= require('passport-local');
 var mongoose		= require('mongoose');
 var flash			= require('connect-flash');
+var bodyParser		= require('body-parser');
 
 
 /**
@@ -150,13 +151,7 @@ var MinerApp = function() {
 	self.initializeServer = function() {
 		self.app = express();
 
-		self.app.use(function(err, req, res, next) {
-			res.status(err.status || 500);
-			res.render('error', {
-				message: err.message,
-				error: err
-			});
-		});
+		self.app.use(bodyParser.urlencoded({ extended: true }));
 
 		// Add statics folders
 		self.setupStatic();

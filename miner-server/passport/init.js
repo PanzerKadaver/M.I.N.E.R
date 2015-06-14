@@ -2,7 +2,7 @@ var login = require('./login');
 var signup = require('./signup');
 var logout = require('./logout');
 
-var Convict = require('../models/Convicts');
+var Convict = require('../models/Convict');
 
 module.exports= function (passport) {
 

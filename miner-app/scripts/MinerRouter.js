@@ -8,6 +8,7 @@ MinerApp.config(function ($stateProvider, $urlRouterProvider) {
 		})
 		.state('register', {
 			url: '/register',
-			templateUrl: '/view/register.html'
+			templateUrl: '/view/register.html',
+			controller: 'RegisterCtrl'
 		});
 });

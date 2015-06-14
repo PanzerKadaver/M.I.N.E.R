@@ -8,7 +8,7 @@ module.exports = function (self, passport) {
 	self.routes = { };
 	self.post = { };
 		
-	self.routes['/'] = function(req, res) {
+	self.routes['/'] = function (req, res) {
 		res.setHeader('Content-Type', 'text/html');
 		self.rCache();
 		res.send(self.cache_get('index.html') );
@@ -20,9 +20,11 @@ module.exports = function (self, passport) {
 		failureFlash: true
 	});
 
-	self.post['/signup'] = passport.authenticate('signup', {
-		successRedirect: '/registered',
-		failureRedirect: '/failure',
-		failureFlash: true
-	});
+
+
+	self.post['/signup'] = function (req, res, next) {
+		passport.authenticate('signup', function (err, user, info) {
+			console.log(err, user, info);
+		})(req, res, next);
+	};
 };
