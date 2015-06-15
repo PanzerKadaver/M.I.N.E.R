@@ -10,6 +10,7 @@ var createCollar = function () {
 	var collar = "";
 	var possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var possibleNumbers = "0123456789";
+	var request;
 
 	collar += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length));
 	collar += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length));
@@ -27,7 +28,7 @@ module.exports = function (passport) {
 	passport.use('signup', new LocalStrategy({
 		passReqToCallback: true
 	}, function (req, username, password, done) {
-		Convict.findOne({ 'username' : username }, function (err, convict) {
+		Convict.findOne({ $or: [ { 'username' : username }, { 'email' : req.param('email') } ] }, function (err, convict) {
 			
 			if (err) {
 				console.log('Error in signup : <' + err + '>');
@@ -35,8 +36,14 @@ module.exports = function (passport) {
 			}
 
 			if (convict) {
-				console.log('User <' + convict + '> already exist');
-				return done(null, false, "User already exist");
+				if (convict.username == username) {
+					console.log('User <' + convict + '> already exist');
+					return done(null, false, "User already exist");
+				}
+				else {
+					console.log('Email address <' + req.param('email') + '> already used');
+					return done(null, false, "Email address already used");
+				}
 			}
 			else {
 				var newConvict = new Convict();
