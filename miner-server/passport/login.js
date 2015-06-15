@@ -18,15 +18,15 @@ module.exports = function (passport) {
 
 			if (!convict) {
 				console.log('User not found with username <' + convict + '>');
-				return done(null, false, req.flash('message', 'Convict not found'));
+				return done(null, false, "404");
 			}
 
 			if (!isValidPassword(convict, password)) {
 				console.log('Invalid password for user <' + convict + '>');
-				return done(null, false, req.flash('message', 'Invalid password'))
+				return done(null, false, "401");
 			}
 
-			return done(null, convict);
+			return done(null, convict, "200");
 		});
 	}));
 };
