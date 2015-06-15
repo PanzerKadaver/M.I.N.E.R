@@ -17,12 +17,12 @@ module.exports = function (passport) {
 				return done(err, false, 201);
 
 			if (!convict) {
-				console.log('User not found with username <' + convict + '>');
+				console.log('User not found with username <' + username + '>');
 				return done(null, false, "404");
 			}
 
 			if (!isValidPassword(convict, password)) {
-				console.log('Invalid password for user <' + convict + '>');
+				console.log('Invalid password for user <' + username + '>');
 				return done(null, false, "401");
 			}
 
