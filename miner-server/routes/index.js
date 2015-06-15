@@ -1,7 +1,8 @@
 var isAuthenticated = function (req, res, next) {
+	console.log("isAuth");
 	if (req.isAuthenticated())
 		return next();
-	res.redirect('/');
+	res.status(401).send();
 };
 
 module.exports = function (self, passport) {
@@ -14,13 +15,33 @@ module.exports = function (self, passport) {
 		res.send(self.cache_get('index.html') );
 	};
 
-	self.post['/login'] = passport.authenticate('login', {
-		successRedirect: '/welcome',
-		failureRedirect: '/failure',
-		failureFlash: true
+	self.app.get('/auth', isAuthenticated, function (req, res, next) {
+		console.log('user: ', req.user);
+		console.log('id: ', )
+		res.status(200).send();
 	});
 
-
+	self.post['/connect'] = function (req, res, next) {
+		passport.authenticate('login', function (err, user, info) {
+			if (err)
+				res.status(500).send({err: info, message: "Database error, please contact administrator with the following code : "});
+			else if (user == false)
+				res.status(info).send();
+			else {
+				req.login(user, function (err) {
+					if (err) {
+						console.log(err);
+						res.status(500).send({err: 202, message: "Connection error, please contact administrator with the following code : "})
+					}
+					res.status(200).send({currentUser: {
+						username: user.username,
+						collar: user.collar,
+						id: user._id
+					}});
+				});
+			}
+		})(req, res, next);
+	};
 
 	self.post['/signup'] = function (req, res, next) {
 		passport.authenticate('signup', function (err, user, info) {
@@ -29,7 +50,7 @@ module.exports = function (self, passport) {
 			else if (user == false)
 				res.status(401).send({message: info});
 			else
-				res.status(200).send(({message: info}));
+				res.status(200).send({message: info});
 		})(req, res, next);
 	};
 };
