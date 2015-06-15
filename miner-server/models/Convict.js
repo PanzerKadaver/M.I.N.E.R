@@ -4,5 +4,6 @@ module.exports = mongoose.model('Convict', {
 	username:	String,
 	password:	String,
 	email:		String,
-	collar:		String
+	collar:		String,
+	welcome:	Boolean
 });

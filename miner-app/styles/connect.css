@@ -1,15 +1,15 @@
-#RegisterContainer {
+#ConnectContainer {
 	text-align: center
 }
 
-#RegisterContainer form {
+#ConnectContainer form {
 	display: inline-block;
 	height: 500px;
 	text-align: left;
 	margin-top: 200px;
 }
 
-#RegisterContainer form div.status-msg {
+#ConnectContainer form div.status-msg {
 	display: inline-block;
 	height: 30px;
 	margin-bottom: 15px;
@@ -19,17 +19,17 @@
 }
 
 
-#RegisterContainer form label {
+#ConnectContainer form label {
 	font-size: 20px;
 }
 
-#RegisterContainer form label.desc {
+#ConnectContainer form label.desc {
 	width: 200px;
 	display: inline-block;
 	margin: 14px;
 }
 
-#RegisterContainer form input[type="text"], #RegisterContainer form input[type="email"], #RegisterContainer form input[type="password"] {
+#ConnectContainer form input[type="text"], #ConnectContainer form input[type="password"] {
 	width: 275px;
 	height: 25px;
 	background-color: rgba(100, 100, 100, 0.3);
@@ -40,11 +40,7 @@
 	padding-left: 10px;
 }
 
-#RegisterContainer form input[type="radio"] {
-	margin-right: 75px;
-}
-
-#RegisterContainer form button {
+#ConnectContainer form button {
 	border: 6px solid rgba(91, 142, 193, 0.3);
 	width: 175px;
 	margin: 50px;
@@ -57,22 +53,22 @@
 	cursor: pointer;
 }
 
-#RegisterContainer form button:hover {
+#ConnectContainer form button:hover {
 	border: 6px solid rgba(1, 176, 240, 0.3);
 	color: rgba(1, 176, 240, 0.3);
 }
 
-#RegisterContainer form button:disabled {
+#ConnectContainer form button:disabled {
 	border: 6px solid rgba(100, 100, 100, 0.3);
 	color: rgba(100, 100, 100, 0.3);
 }
 
-#RegisterContainer form div.input-group {
+#ConnectContainer form div.input-group {
 	display: inline-block;
 	position: relative;
 }
 
-#RegisterContainer form span.form-error {
+#ConnectContainer form span.form-error {
 	font-size: 17px;
 	position: absolute;
 	display: inline-block;

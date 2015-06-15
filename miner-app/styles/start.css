@@ -1,7 +1,5 @@
 #StartContainer {
 	text-align: center;
-	width: 100%;
-	height: 100%;
 }
 
 #toRegister, #toConnect {
@@ -22,7 +20,6 @@
 	border: 6px solid rgba(91, 142, 193, 0.3);
 	border-radius: 15px;
 	font-size: 24px;
-	font-family: monospace;
 	font-weight: bold;
 	color: rgba(91, 142, 193, 0.3);
 	cursor: pointer;

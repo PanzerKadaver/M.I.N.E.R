@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'electrolize';
+    src: url('Electrolize-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .bright-blue {
 	color: #01B0F0;
 	text-shadow: 0 0 20px rgba(4, 99, 128, 0.86);
