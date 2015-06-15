@@ -1,4 +1,4 @@
-MinerControllers.controller('ConnectCtrl', ['$rootScope', '$scope', '$http', function ($rootScope, $scope, $http) {
+MinerControllers.controller('ConnectCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$state', function ($rootScope, $scope, $http, $timeout, $state) {
 	$scope.connectUser = {
 		username: "",
 		password: ""
@@ -15,7 +15,11 @@ MinerControllers.controller('ConnectCtrl', ['$rootScope', '$scope', '$http', fun
 		promise.then(function (resolve) {
 			$scope.status = 2;
 			$scope.response = "Authentification successfull";
-			$rootScope.currenttUser = resolve.data.currentUser;
+			$rootScope.currentUser = resolve.data.currentUser;
+
+			$timeout(function ($state) {
+				$state.go('game');
+			}, 500, true, $state);
 		}, function (reject) {
 			$scope.status = 3;
 			if (reject.status == 401)
