@@ -1,5 +1,5 @@
 MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', '$http', '$timeout', function ($rootScope, $scope, $state, $http, $timeout) {
-	$scope.version = "0.0.4";
+	$scope.version = "0.0.5";
 	$scope.ghostSwitch = false;
 	$scope.rootPending = false;
 
