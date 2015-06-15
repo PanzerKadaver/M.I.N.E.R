@@ -15,6 +15,7 @@
 		<!-- App Controllers -->
 		<script type="text/javascript" src="ctrl/RootCtrl.js"></script>
 		<script type="text/javascript" src="ctrl/RegisterCtrl.js"></script>
+		<script type="text/javascript" src="ctrl/ConnectCtrl.js"></script>
 
 		<!-- App Services -->
 
@@ -28,6 +29,7 @@
 		<link rel="stylesheet" type="text/css" href="css/flicker.css">
 		<link rel="stylesheet" type="text/css" href="css/start.css">
 		<link rel="stylesheet" type="text/css" href="css/register.css">
+		<link rel="stylesheet" type="text/css" href="css/connect.css">
 
 	</head>
 	<body ng-controller="RootCtrl">
@@ -36,7 +38,7 @@
 		</audio>
 		<section id="AppContainer">
 			<div id="PDA">
-				<input type="checkbox" id="ghostSwitch" name="ghostSwitch">
+				<input type="checkbox" id="ghostSwitch" name="ghostSwitch" ng-model="ghostSwitch">
 				<div id="PDA-Content" class="container">
 					<div class="switcher">
 						<label for="ghostSwitch" ng-click="switchSound()">TAP TO START</label>
