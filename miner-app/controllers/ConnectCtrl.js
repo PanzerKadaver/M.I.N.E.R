@@ -15,14 +15,7 @@ MinerControllers.controller('ConnectCtrl', ['$rootScope', '$scope', '$http', fun
 		promise.then(function (resolve) {
 			$scope.status = 2;
 			$scope.response = "Authentification successfull";
-			console.log(resolve);
-			var auth = $http.get('/auth');
-
-			auth.then(function (resolve) {
-				console.log('resolve: ', resolve);
-			}, function (reject) {
-				console.log('reject', reject);
-			});
+			$rootScope.currenttUser = resolve.data.currentUser;
 		}, function (reject) {
 			$scope.status = 3;
 			if (reject.status == 401)
