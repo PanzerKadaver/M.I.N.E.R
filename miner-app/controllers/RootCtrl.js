@@ -1,7 +1,10 @@
-MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', '$http', '$timeout', function ($rootScope, $scope, $state, $http, $timeout) {
 	$scope.version = "0.0.4";
 	$scope.ghostSwitch = false;
-	$scope.currentUser = {};
+	$scope.rootPending = false;
+
+	$rootScope.currentUser = null;
+	$rootScope.lastAuth = false;
 
 	$scope.switchSound = function() {
 		var audio = document.getElementById('switchSound');
@@ -14,6 +17,33 @@ MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', funct
 		if (toState.name != "start" && $scope.ghostSwitch == false) {
 			event.preventDefault();
 			$state.go('start');
+		}
+		else if (toState.data.auth == true) {
+			if ($rootScope.currentUser == null) {
+				event.preventDefault();
+				$state.go('connect');
+			}
+			else if ($rootScope.lastAuth == false) {
+				console.log($rootScope.currentUser);
+				event.preventDefault();
+				$scope.rootPending = true;
+
+				var promise = $http.post('/auth', {id: $rootScope.currentUser._id });
+
+				promise.then(function (resolve) {
+					$rootScope.lastAuth = true;
+					$timeout(function ($scope, $state) {
+						$scope.rootPending = false;
+						$state.go(toState.name);
+					}, 200, true, $scope, $state);
+				}, function (reject) {
+					$state.go(connect);
+					$scope.rootPending = false;
+				});
+			}
+			else {
+				$rootScope.lastAuth = false;
+			}
 		}
 	});
 }]);

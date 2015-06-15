@@ -24,5 +24,15 @@ MinerApp.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: '/view/game.html',
 			controller: 'GameCtrl',
 			data: { auth: true }
-		});
+		})
+			.state('game.welcome', {
+				url: '/welcome',
+				templateUrl: '/view/game/welcome.html',
+				data: {auth: true }
+			})
+			.state('game.main', {
+				url: '/main',
+				templateUrl: '/view/game/main.html',
+				data: {auth: true }
+			});
 });

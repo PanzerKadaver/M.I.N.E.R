@@ -1,5 +1,4 @@
 var isAuthenticated = function (req, res, next) {
-	console.log("isAuth");
 	if (req.isAuthenticated())
 		return next();
 	res.status(401).send();
@@ -15,10 +14,11 @@ module.exports = function (self, passport) {
 		res.send(self.cache_get('index.html') );
 	};
 
-	self.app.get('/auth', isAuthenticated, function (req, res, next) {
-		console.log('user: ', req.user);
-		console.log('id: ', )
-		res.status(200).send();
+	self.app.post('/auth', isAuthenticated, function (req, res, next) {
+		if (req.user._id == req.param('id'))
+			res.status(200).send();
+		else
+			res.status(401).send();
 	});
 
 	self.post['/connect'] = function (req, res, next) {
@@ -33,11 +33,12 @@ module.exports = function (self, passport) {
 						console.log(err);
 						res.status(500).send({err: 202, message: "Connection error, please contact administrator with the following code : "})
 					}
-					res.status(200).send({currentUser: {
-						username: user.username,
-						collar: user.collar,
-						id: user._id
-					}});
+					var currentUser = user;
+
+					currentUser.password = null;
+					currentUser.email = null;
+
+					res.status(200).send({currentUser: currentUser });
 				});
 			}
 		})(req, res, next);
