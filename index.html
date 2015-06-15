@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="ctrl/RootCtrl.js"></script>
 		<script type="text/javascript" src="ctrl/RegisterCtrl.js"></script>
 		<script type="text/javascript" src="ctrl/ConnectCtrl.js"></script>
+		<script type="text/javascript" src="ctrl/GameCtrl.js"></script>
 
 		<!-- App Services -->
 
@@ -30,6 +31,7 @@
 		<link rel="stylesheet" type="text/css" href="css/start.css">
 		<link rel="stylesheet" type="text/css" href="css/register.css">
 		<link rel="stylesheet" type="text/css" href="css/connect.css">
+		<link rel="stylesheet" type="text/css" href="css/game/welcome.css">
 
 	</head>
 	<body ng-controller="RootCtrl">
@@ -44,6 +46,7 @@
 						<label for="ghostSwitch" ng-click="switchSound()">TAP TO START</label>
 					</div>
 					<div class="screen">
+						<div class="root-status bright-orange" ng-show="rootPending"><i class="fa fa-refresh fa-spin"></i></div>
 						<div class="view-container" ui-view></div>
 					</div>
 				</div>
