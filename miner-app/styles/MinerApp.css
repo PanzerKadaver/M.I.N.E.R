@@ -4,7 +4,11 @@ body {
 	position: relative;
 	height: 100%;
 	-webkit-user-select: none;
-	font-family: monospace;
+	font-family: electrolize, monospace !important;
+}
+
+input, textarea, keygen, select, button {
+	font-family: electrolize, monospace !important;
 }
 
 #AppContainer {
