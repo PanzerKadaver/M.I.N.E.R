@@ -1,8 +1,8 @@
 MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', '$http', '$timeout', function ($rootScope, $scope, $state, $http, $timeout) {
 	$scope.version = "0.0.5";
 	$scope.ghostSwitch = false;
-	$scope.rootPending = false;
-
+	
+	$rootScope.rootPending = false;
 	$rootScope.currentUser = null;
 	$rootScope.lastAuth = false;
 
@@ -26,19 +26,19 @@ MinerControllers.controller('RootCtrl', ['$rootScope', '$scope', '$state', '$htt
 			else if ($rootScope.lastAuth == false) {
 				console.log($rootScope.currentUser);
 				event.preventDefault();
-				$scope.rootPending = true;
+				$rootScope.rootPending = true;
 
 				var promise = $http.post('/auth', {id: $rootScope.currentUser._id });
 
 				promise.then(function (resolve) {
 					$rootScope.lastAuth = true;
 					$timeout(function ($scope, $state) {
-						$scope.rootPending = false;
+						$rootScope.rootPending = false;
 						$state.go(toState.name);
 					}, 200, true, $scope, $state);
 				}, function (reject) {
 					$state.go(connect);
-					$scope.rootPending = false;
+					$rootScope.rootPending = false;
 				});
 			}
 			else {
