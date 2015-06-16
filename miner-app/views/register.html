@@ -24,7 +24,7 @@
 			<span class="form-error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.required">Missing information</span>
 			<span class="form-error bright-red" ng-show="registerForm.email.$dirty && registerForm.email.$error.email">Misformated information</span>
 		</div></br>
-		<button type="button" ui-sref="start">CANCEL</button>
-		<button type="submit" ng-disabled="registerForm.$invalid">REGISTER</button>
+		<button type="button" ui-sref="start" ng-disabled="status == 1">CANCEL</button>
+		<button type="submit" ng-disabled="status == 1 || registerForm.$invalid">REGISTER</button>
 	</form>
 </div>

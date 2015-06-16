@@ -24,12 +24,27 @@ input, textarea, keygen, select, button {
 }
 
 .root-status {
-	font-size: 25px;
+	font-size: 20px;
 	position: absolute;
 	bottom: 15px;
 	right: 15px;
-	width: 30px;
 	height: 30px;
+}
+
+.root-status i.fa, .root-version i.fa {
+	margin-right: 10px;
+}
+
+.root-version {
+	font-size: 17px;
+	position: absolute;
+	bottom: 0px;
+	left: 15px;
+	height: 30px;
+}
+
+.root-version i.fa {
+	font-size: 20px;
 }
 
 .root-container {

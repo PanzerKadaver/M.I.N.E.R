@@ -15,7 +15,7 @@
 			<input type="password" name="password" id="password" ng-model="connectUser.password" required>
 			<span class="form-error bright-red" ng-show="connectForm.password.$dirty && connectForm.password.$error.required">Missing information</span>
 		</div></br>
-		<button type="button" ui-sref="start">CANCEL</button>
-		<button type="submit" ng-disabled="connectForm.$invalid">CONNECT</button>
+		<button type="button" ui-sref="start" ng-disabled="status == 1 || status == 2">CANCEL</button>
+		<button type="submit" ng-disabled="status == 1 || status == 2 || connectForm.$invalid">CONNECT</button>
 	</form>
 </div>

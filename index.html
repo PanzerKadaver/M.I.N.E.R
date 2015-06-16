@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="ctrl/RegisterCtrl.js"></script>
 		<script type="text/javascript" src="ctrl/ConnectCtrl.js"></script>
 		<script type="text/javascript" src="ctrl/GameCtrl.js"></script>
+		<script type="text/javascript" src="ctrl/game/WelcomeCtrl.js"></script>
 
 		<!-- App Services -->
 
@@ -46,7 +47,8 @@
 						<label for="ghostSwitch" ng-click="switchSound()">TAP TO START</label>
 					</div>
 					<div class="screen">
-						<div class="root-status bright-orange" ng-show="rootPending"><i class="fa fa-refresh fa-spin"></i></div>
+						<div class="root-status bright-orange" ng-show="rootPending"><i class="fa fa-refresh fa-spin"></i>Please, stand-by</div>
+						<div class="root-version bright-orange"><i class="fa fa-server"></i>M.I.N.E.R OS v{{version}}</div>
 						<div class="view-container" ui-view></div>
 					</div>
 				</div>
