@@ -52,6 +52,7 @@ module.exports = function (passport) {
 				newConvict.password = createHash(password);
 				newConvict.email = req.param('email');
 				newConvict.collar = createCollar();
+				newConvict.welcome = false;
 
 				newConvict.save(function (err) {
 					if (err) {
