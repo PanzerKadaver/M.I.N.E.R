@@ -21,6 +21,8 @@ module.exports = function (self, passport) {
 			res.status(401).send();
 	});
 
+	self.routes['/welcome'] = require('./welcome');
+
 	self.post['/connect'] = function (req, res, next) {
 		passport.authenticate('login', function (err, user, info) {
 			if (err)
