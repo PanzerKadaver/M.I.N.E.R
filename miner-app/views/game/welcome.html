@@ -10,6 +10,6 @@
 	<p>— The Overseer</p>
 	<h1 class="bright-red"><i>--- END OF TRANSMISSION ---</i></h1>
 	<div class="discard">
-		<button type="button" ng-click="discardWelcome()">DISCARD</button>
+		<button type="button" ng-click="discardWelcome()" ng-disabled="$root.rootPending">DISCARD</button>
 	</div>
 </div>
