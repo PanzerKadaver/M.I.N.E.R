@@ -9,3 +9,31 @@
 #GameWelcome p {
 	font-size: 1.5em;
 }
+
+#GameWelcome .discard {
+	width: 100%;
+	text-align: center;
+}
+
+#GameWelcome .discard button {
+	border: 6px solid rgba(91, 142, 193, 0.3);
+	width: 175px;
+	margin: 50px;
+	background-color: transparent;
+	padding: 20px;
+	font-size: 20px;
+	color: rgba(91, 142, 193, 0.3);
+	font-weight: bold;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+#GameWelcome .discard button:hover {
+	border: 6px solid rgba(1, 176, 240, 0.3);
+	color: rgba(1, 176, 240, 0.3);
+}
+
+#GameWelcome .discard button:disabled {
+	border: 6px solid rgba(100, 100, 100, 0.3);
+	color: rgba(100, 100, 100, 0.3);
+}
