@@ -28,6 +28,7 @@ MinerApp.config(function ($stateProvider, $urlRouterProvider) {
 			.state('game.welcome', {
 				url: '/welcome',
 				templateUrl: '/view/game/welcome.html',
+				controller: 'WelcomeCtrl',
 				data: {auth: true }
 			})
 			.state('game.main', {
